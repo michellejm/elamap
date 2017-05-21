@@ -1,0 +1,81 @@
+<html>
+<head>
+  <title>A Leaflet map!</title>
+  <link rel="stylesheet" href="css/leaflet.css"/>
+  <link rel="stylesheet" href="css/MarkerCluster.css">
+  <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/leaflet_awesome_markers.css">
+  
+
+  <script src="js/leaflet.js"></script>
+  <script src="js/leaflet.markercluster.js"></script>
+  <script src="js/jquery-2.1.1.min.js"></script>
+  <script src="js/leaflet_awesome_markers.js"></script>
+  
+  <style>
+    #map{ width: 900px; height: 500px; }
+  </style>
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <script>
+
+  // initialize the map by creating a map variable, and using the leaflet 'map' function. 
+  //The map object needs a center and a zoom parameter. 
+  var map = L.map('map', {
+    center: [39.76, -98.50], 
+    zoom: 4
+  });
+
+  // load a tile layer
+      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: 'Tiles by <a href="http://www.openstreetmap.org/">OSM</a>, Data by <a href="http://census.gov">US Census</a>',
+      maxZoom: 12,
+      minZoom: 1,
+    }).addTo(map);
+    
+    //Load state data (boundaries and number of refugees per state)
+    $.getJSON("data/queens.geojson",function(stateData){
+  L.geoJson(stateData, {
+    style: function(feature){
+      //establish the cut offs for the colors
+
+  //add popups to tell how many refugees per state
+  onEachFeature: function(feature, layer){
+  layer.bindPopup("<strong>" + feature.properties.language + "</strong><br/>" + feature.properties.country + " Refugees")
+  }
+  	}).addTo(map);
+});
+      // load GeoJSON of city latitude & longitude from an external file
+  $.getJSON("data/languages.geojson",function(data){
+    var aMarker = L.AwesomeMarkers.icon({
+       prefix: 'fa', //font awesome rather than bootstrap 
+       icon: 'home', 
+       iconColor: 'black',
+    });
+
+  	
+    // add GeoJSON layer to the map once the file is loaded
+    var rfg = L.geoJson(data,{
+    pointToLayer: function(feature,latlng){
+      //add the markers to the layer
+    	var marker = L.marker(latlng,{icon: aMarker});
+      //bind the popups to the marker
+    	marker.bindPopup(feature.properties.language + '<br/>' + feature.properties.country);
+    	return marker;
+    	}
+    }); 
+    //create clusters when many points are nearby
+    var clusters = L.markerClusterGroup({
+    	maxClusterRadius:30
+    });
+    clusters.addLayer(rfg);
+    map.addLayer(clusters);
+  });
+ 
+  </script>
+  </body>

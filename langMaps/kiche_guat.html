@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>K'iche'</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+  <link rel="stylesheet" href="css/leaflet.css"/>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css' rel='stylesheet' />
+  <link rel="stylesheet" href="css/MarkerCluster.css">
+  <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js'></script>
+
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet.markercluster.js"></script>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+
+<script>
+
+var map = L.map('map', {
+    center: [14.6349, -90.5069], // starting position
+    zoom: 6 // starting zoom
+});
+
+// load a tile layer
+L.tileLayer('http://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg',
+    {
+      attribution: 'Tiles by <a href="http://maps.stamen.com">Stamen</a>, Data from <a href="http://ethnologue.org/">Ethnologue</a>',
+      maxZoom: 14,
+      minZoom: 1,
+    }).addTo(map);
+
+
+$.getJSON("langMaps/kiche_dslv.geojson", function(langData){
+  L.geoJson( langData, {
+
+    style: function(feature){
+      var fillColor
+      fillColor = "#EE7600"
+      return { color: "white", weight: 3, fillColor: fillColor, fillOpacity: .8 };
+    },
+
+    onEachFeature: function( feature, layer ){
+      layer.bindPopup("With over 1 million speakers, K'iche' (also spelled Quiché) is the second most commonly spoken language in Guatemala. Most K'iche' speakers also speak Spanish.")
+    }
+  }).addTo(map);
+});
+
+
+</script>
+
+  </body>
+  </html>
