@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Queens Language Map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+  <link rel="stylesheet" href="css/leaflet.css"/>
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet'>
+
+    <script src="js/leaflet.js"></script>
+
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+
+    <style>
+        body { margin:6; padding:6; }
+        #map { position:absolute; top:12; bottom:12; float: top; width:100%; }
+    </style>
+</head>
+<body>
+
+<h1>Languages of Queens</h1>
+
+<p> Click on a neighborhood in Queens to see what languages are spoken there, or use the search box to look for a particular language. </p><p>(<em>Currently only Albanian in Ridgewood, and K'iche' in Corona work</em>)</p>
+
+<div id='map' style="width: 900px; height: 600px"></div>
+
+
+
+<script>
+
+var map = L.map('map', {
+    center: [40.728224, -73.794852], // starting position
+    zoom: 11 // starting zoom
+});
+
+// load a tile layer
+L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png',
+    {
+      attribution: 'Tiles by <a href="http://maps.stamen.com">Stamen</a>, Data from <a href="http://elalliance.org/">Endangered Language Alliance</a>',
+      maxZoom: 14,
+      minZoom: 1,
+    }).addTo(map);
+
+
+$.getJSON("data/lang.geojson",function(langData){
+  L.geoJson( langData, {
+
+    style: function(feature){
+      var fillColor;
+       var boro = feature.properties.boroname;
+
+      if (boro == 'Queens') fillColor = "pink";
+      else fillColor = "#c0c0c0";
+      return { color: "#999", weight: 1, fillColor: fillColor, fillOpacity: .4 };
+    },
+
+
+    onEachFeature: function( feature, layer ){
+
+      layer.bindPopup("Languages spoken in " + feature.properties.ntaname + ": <br/>" 
+        //+ feature.properties.langs_language + " " 
+        + feature.properties.link +"</br>"
+        //+ feature.properties.langs2_language + " " 
+        + feature.properties.link2+ "<br/>" 
+        //+ feature.properties.langs1_language + " " 
+        + feature.properties.link1)
+    }
+  }).addTo(map);
+});
+
+
+</script>
+
+  </body>
+  </html>
