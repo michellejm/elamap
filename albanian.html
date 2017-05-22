@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Albanian</title>
+    <title>Queens Language Map</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -21,14 +21,27 @@
     <script src="js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
 
+    <!-- Custom CSS -->
     <style>
-        body { margin:6; padding:6; }
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
         #qmap { position:relative; top:12; bottom:12;  width:40%; float:left;}
         #wmap { position:relative; top:12; bottom:12; margin-left: 50px; width:40%; float:left; }
     </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
 
 <body>
+
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -55,33 +68,54 @@
                         <a href="kiche.html">K'iche'</a>
                     </li>
                 </ul>
+                
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
+
     <!-- Page Content -->
     <div class="container">
 
         <div class="row">
             <div class="col-lg-12 text-left">
-<h1> Where Albanian is spoken</h1>
+<h1>Where Albanian is spoken...</h1>
             </div>
+        </div>
 
-<div id ="qmap">
-<h2>...in Queens, NY</h2>
-  <div id="q_map" style="width: 600px; height: 400px"></div>
-      <p id = "qtext" style="width: 600px; height: 400px">The number of Albanian speakers in New York City has been steadily increasingly over the past 15 years, and Albanian can be heard throughout the five boroughs at the <a href = "http://www.aaic-of-queens.com/">Albanian-American Islamic Center</a>, <a href ="http://www.kosovodiaspora.org/an-albanian-language-school-in-manhattan/">language classes</a>, and in "Little Albania's" from <a href = "http://bronxink.org/2011/12/15/21004-little-albania/">the Bronx</a> to <a href = "https://www.facebook.com/StatenIslandAlbanians/">Staten Island</a>. </p>
-</div>
+<div class ="row">
+    <div class="col-lg-6">
 
-<div id ="wmap">
-<h2>... in the world</h2>
+    <div id ="qmap">
+    <h2>...in Queens, NY</h2>
+        <div id="q_map" style="width: 600px; height: 400px">
+            
+        </div>
+        
+        <p id = "qtext" style="width: 600px; height: 400px"></br>The number of Albanian speakers in New York City has been steadily increasingly over the past 15 years, and Albanian can be heard throughout the five boroughs at the <a href = "http://www.aaic-of-queens.com/">Albanian-American Islamic Center</a>, <a href ="http://www.kosovodiaspora.org/an-albanian-language-school-in-manhattan/">language classes</a>, and in "Little Albania's" from <a href = "http://bronxink.org/2011/12/15/21004-little-albania/">the Bronx</a> to <a href = "https://www.facebook.com/StatenIslandAlbanians/">Staten Island</a>. </p>
+        
+    </div>
+    </div>
 
-  <div id="w_map" style="width: 600px; height: 400px"></div>
-  <p id = "wtext" style="width: 600px; height: 400px">Albanian is a macrolanguage, comprised of many smaller languages and dialects spoken in Albania, Kosovo, and The Republic of Montenegro. Because of the large diasporic community, there are many Albanian speakers worldwide, especially in Italy, Greece, Germany, Turkey, and of course New York City.</p>
-</div>
+    <div class="col-lg-6">
+    <div id ="wmap">
+    <h2>... in the world</h2>
 
+        <div id="w_map" style="width: 600px; height: 400px">
+        
+        </div>
+    
+    <p id = "wtext" style="width: 600px; height: 400px"></br>Albanian is a macrolanguage, comprised of many smaller languages and dialects spoken in Albania, Kosovo, and The Republic of Montenegro. Because of the large diasporic community, there are many Albanian speakers worldwide, especially in Italy, Greece, Germany, Turkey, and of course New York City.</p>
 
+    </div>
+
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
 <script>
 
 var qmap = L.map('q_map', {
@@ -112,7 +146,6 @@ $.getJSON("data/ridgewood.geojson", function(langDataQ){
     }
   }).addTo(qmap);
 });
-
 
 var wmap = L.map('w_map', {
     center: [41.1533, 20.1683], // starting position
@@ -145,6 +178,12 @@ $.getJSON("langMaps/albanian_dslv.geojson", function(langData){
 
 
 </script>
+    <!-- jQuery Version 1.11.1 -->
+<!--   <script src="js/jquery.js"></script> -->
 
-  </body>
-  </html>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
