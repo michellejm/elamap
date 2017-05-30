@@ -6,11 +6,11 @@ An interactive visualization of the global nature of linguistic diversity in Que
 
 New York City is one of the most linguistically diverse places in the world; estimates show anywhere from 200-800 different languages represented across the five boroughs. Nowhere is this more apparent than in Queens, where many of these languages are spoken in schools, restaurants, community centers, and homes across the area. This project takes a snapshot of this linguistic diversity and highlights the ways that language connects New York City and the rest of the world. By visualizing the languages that are represented and casting them against stories of migration, language, and identity, we come to see the ways that language ties us together, and give life to the many languages of Queens, NY.
 
-	### Research Questions
+### Research Questions
 	
-	* In what ways does language make New York City a truly global city? 
-	* How are the languages spoken in Queens representative of the world as a whole?
-	* To what extent can language symbolize diversity in Queens?
+* In what ways does language make New York City a truly global city? 
+* How are the languages spoken in Queens representative of the world as a whole?
+* To what extent can language symbolize diversity in Queens?
 
 ## Take-away
 
